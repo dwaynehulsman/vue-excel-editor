@@ -563,9 +563,9 @@
 <script>
 import Vue from "vue";
 import VueExcelFilter from "./VueExcelFilter.vue";
-import PanelFilter from "./PanelFilter.vue";
-import PanelSetting from "./PanelSetting.vue";
-import PanelFind from "./PanelFind.vue";
+import PanelFilter from "./panelFilter.vue";
+import PanelSetting from "./panelSetting.vue";
+import PanelFind from "./panelFind.vue";
 import DatePicker from "vue2-datepicker";
 import XLSX from "xlsx";
 
@@ -857,8 +857,9 @@ export default {
         this.lazy(() => {
           const setting = this.getSetting();
           if (this.remember)
-            localStorage[window.location.pathname + "." + this.token] =
-              JSON.stringify(setting);
+            localStorage[
+              window.location.pathname + "." + this.token
+            ] = JSON.stringify(setting);
           this.$emit("setting", setting);
         });
       },
@@ -978,7 +979,11 @@ export default {
       this.colHash = this.hashCode(this.version + JSON.stringify(this.fields));
     },
     insertColumn(pos) {
-      const colname = "COL-" + Math.random().toString().slice(2, 6);
+      const colname =
+        "COL-" +
+        Math.random()
+          .toString()
+          .slice(2, 6);
       let colDef = {
         name: colname,
         label: colname,
@@ -1092,7 +1097,10 @@ export default {
             case this.columnFilter[k].startsWith("<="):
               filter[k] = {
                 type: 1,
-                value: this.columnFilter[k].slice(2).trim().toUpperCase(),
+                value: this.columnFilter[k]
+                  .slice(2)
+                  .trim()
+                  .toUpperCase(),
               };
               if (this.fields[k].type === "number")
                 filter[k].value = Number(filter[k].value);
@@ -1100,13 +1108,19 @@ export default {
             case this.columnFilter[k].startsWith("<>"):
               filter[k] = {
                 type: 9,
-                value: this.columnFilter[k].slice(2).trim().toUpperCase(),
+                value: this.columnFilter[k]
+                  .slice(2)
+                  .trim()
+                  .toUpperCase(),
               };
               break;
             case this.columnFilter[k].startsWith("<"):
               filter[k] = {
                 type: 2,
-                value: this.columnFilter[k].slice(1).trim().toUpperCase(),
+                value: this.columnFilter[k]
+                  .slice(1)
+                  .trim()
+                  .toUpperCase(),
               };
               if (this.fields[k].type === "number")
                 filter[k].value = Number(filter[k].value);
@@ -1114,7 +1128,10 @@ export default {
             case this.columnFilter[k].startsWith(">="):
               filter[k] = {
                 type: 3,
-                value: this.columnFilter[k].slice(2).trim().toUpperCase(),
+                value: this.columnFilter[k]
+                  .slice(2)
+                  .trim()
+                  .toUpperCase(),
               };
               if (this.fields[k].type === "number")
                 filter[k].value = Number(filter[k].value);
@@ -1122,7 +1139,10 @@ export default {
             case this.columnFilter[k].startsWith(">"):
               filter[k] = {
                 type: 4,
-                value: this.columnFilter[k].slice(1).trim().toUpperCase(),
+                value: this.columnFilter[k]
+                  .slice(1)
+                  .trim()
+                  .toUpperCase(),
               };
               if (this.fields[k].type === "number")
                 filter[k].value = Number(filter[k].value);
@@ -1130,7 +1150,10 @@ export default {
             case this.columnFilter[k].startsWith("="):
               filter[k] = {
                 type: 0,
-                value: this.columnFilter[k].slice(1).trim().toUpperCase(),
+                value: this.columnFilter[k]
+                  .slice(1)
+                  .trim()
+                  .toUpperCase(),
               };
               break;
             case this.columnFilter[k].startsWith("*") &&
@@ -1148,7 +1171,10 @@ export default {
               !this.columnFilter[k].slice(1).includes("*"):
               filter[k] = {
                 type: 6,
-                value: this.columnFilter[k].slice(1).trim().toUpperCase(),
+                value: this.columnFilter[k]
+                  .slice(1)
+                  .trim()
+                  .toUpperCase(),
               };
               break;
             case this.columnFilter[k].startsWith("~"):
@@ -1161,7 +1187,10 @@ export default {
               !this.columnFilter[k].slice(0, -1).includes("*"):
               filter[k] = {
                 type: 7,
-                value: this.columnFilter[k].slice(0, -1).trim().toUpperCase(),
+                value: this.columnFilter[k]
+                  .slice(0, -1)
+                  .trim()
+                  .toUpperCase(),
               };
               break;
             case this.columnFilter[k].includes("*") ||
@@ -1957,10 +1986,9 @@ export default {
         window.getComputedStyle(elm, null).getPropertyValue(css);
       };
       this.sep = {};
-      this.sep.curCol =
-        this.colgroupTr.children[
-          Array.from(this.labelTr.children).indexOf(e.target.parentElement)
-        ];
+      this.sep.curCol = this.colgroupTr.children[
+        Array.from(this.labelTr.children).indexOf(e.target.parentElement)
+      ];
       // this.sep.nxtCol = this.sep.curCol.nextElementSibling
       this.sep.pageX = e.pageX;
       let padding = 0;
@@ -2014,8 +2042,9 @@ export default {
       window.removeEventListener("mouseup", this.colSepMouseUp);
       const setting = this.getSetting();
       if (this.remember)
-        localStorage[window.location.pathname + "." + this.token] =
-          JSON.stringify(setting);
+        localStorage[
+          window.location.pathname + "." + this.token
+        ] = JSON.stringify(setting);
       this.$emit("setting", setting);
     },
 
@@ -2039,7 +2068,9 @@ export default {
           const field = this.fields[c].name;
           if (
             typeof rec[field] !== "undefined" &&
-            String(rec[field]).toUpperCase().indexOf(s) >= 0
+            String(rec[field])
+              .toUpperCase()
+              .indexOf(s) >= 0
           ) {
             this.pageTop = this.findPageTop(r);
             setTimeout(() => {
@@ -2062,7 +2093,9 @@ export default {
           const field = this.fields[c].name;
           if (
             typeof rec[field] !== "undefined" &&
-            String(rec[field]).toUpperCase().indexOf(s) >= 0
+            String(rec[field])
+              .toUpperCase()
+              .indexOf(s) >= 0
           ) {
             this.pageTop = this.findPageTop(r);
             this.moveInputSquare(r - this.pageTop, c);
@@ -3309,7 +3342,10 @@ export default {
               const rec = this.value[i];
               if (
                 typeof rec[name] !== "undefined" &&
-                rec[name].toString().toUpperCase().startsWith(value) &&
+                rec[name]
+                  .toString()
+                  .toUpperCase()
+                  .startsWith(value) &&
                 list.indexOf(rec[name]) === -1
               )
                 list.push(rec[name]);
@@ -3365,7 +3401,9 @@ export default {
       return (
         (new Date().getTime() % 1e8) +
         "-" +
-        Math.random().toString().slice(2, 7)
+        Math.random()
+          .toString()
+          .slice(2, 7)
       );
     },
     hashCode(s) {
