@@ -2870,7 +2870,7 @@ export default {
         const row = e.target.parentNode;
         const colPos = Array.from(row.children).indexOf(e.target) - 1;
         const rowPos = Array.from(row.parentNode.children).indexOf(row);
-        this.$emit("cell-click", { rowPos, colPos });
+        this.$emit("cell-click", { rowPos, colPos, row });
         this.moveInputSquare(rowPos, colPos);
         if (this.currentField && this.currentField.link && e.altKey)
           setTimeout(() =>
